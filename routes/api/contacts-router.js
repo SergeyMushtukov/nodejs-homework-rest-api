@@ -1,6 +1,7 @@
 import express from "express";
 import contactsController from "../../controllers/contacts-controller.js";
 import {
+  authenticate,
   isEmptyBody,
   isValidId,
   isEmptyFavoriteBody,
@@ -18,6 +19,8 @@ const contactUpdateValidate = validateBody(contactUpdateSchema);
 const contactUpdateFavoriteValidate = validateBody(contactUpdateFavoriteSchema);
 
 const contactsRouter = express.Router();
+
+contactsRouter.use(authenticate);
 
 contactsRouter.get("/", contactsController.getAll);
 
